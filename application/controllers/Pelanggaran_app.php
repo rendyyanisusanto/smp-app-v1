@@ -64,7 +64,7 @@ class Pelanggaran_app extends CI_Controller {
 	            // Jika kompresi gagal
 	            $error = $this->image_lib->display_errors();
 	            $this->session->set_flashdata('error', $error);
-	            redirect('pelanggaran/form');
+	            redirect('pelanggaran_app/index');
 	        }
 
 	        $this->image_lib->clear();

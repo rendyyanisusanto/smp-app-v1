@@ -79,9 +79,17 @@ class Auth extends CI_Controller
 			if ($this->ion_auth->login($this->input->post('identity'), $this->input->post('password'), $remember))
 			{
 				//if the login is successful
+
+				$group_name=$this->ion_auth->get_users_groups()->row();
+
+				
 				//redirect them back to the home page
 				$this->session->set_flashdata('message', $this->ion_auth->messages());
-				redirect('administrator/dashboard/index', 'refresh');
+				if ($group_name->name == "admin") {
+					redirect($group_name->name.'/Dashboard#Dashboard/get_data', 'refresh');
+				}else{
+					redirect('general/Dashboard#Dashboard/get_data', 'refresh');
+				}
 			}
 			else
 			{
@@ -109,6 +117,8 @@ class Auth extends CI_Controller
 				'id' => 'password',
 				'type' => 'password',
 			];
+
+			$this->data['title']	=	$this->db->get('profil_website')->row_array();
 
 			$this->_render_page('auth' . DIRECTORY_SEPARATOR . 'login', $this->data);
 		}

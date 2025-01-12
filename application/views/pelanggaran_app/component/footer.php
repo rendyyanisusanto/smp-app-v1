@@ -24,7 +24,7 @@
                         return {
                             results: data.map(siswa => ({
                                 id: siswa.id,
-                                text: siswa.nis + ' - ' + siswa.nama // Gabungkan nis dan nama
+                                text: siswa.nama // Gabungkan nis dan nama
                             }))
                         };
                     }
