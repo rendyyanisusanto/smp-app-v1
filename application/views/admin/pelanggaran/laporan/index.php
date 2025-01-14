@@ -1,0 +1,45 @@
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Filter Laporan</h3>
+    </div>
+    <div class="card-body">
+        <form id="filterForm">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="filterBy">Filter Berdasarkan:</label>
+                        <select id="filterBy" class="form-control">
+                            <option value="minggu">Minggu</option>
+                            <option value="bulan">Bulan</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="kelas">Kelas:</label>
+                        <select id="kelas" class="form-control">
+                            <!-- Option kelas akan diisi oleh backend -->
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group" id="tanggalContainer">
+                        <label for="tanggal">Tanggal:</label>
+                        <input type="date" id="tanggal" class="form-control">
+                    </div>
+                </div>
+                <button type="button" id="generateReport" class="btn btn-primary">Generate Laporan</button>
+            </form>
+        </div>
+    </div>
+</form>
+</div>
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Hasil Laporan</h3>
+    </div>
+    <div class="card-body">
+        <div class="reportTable"></div>
+    </div>
+</div>

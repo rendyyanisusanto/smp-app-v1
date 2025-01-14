@@ -44,13 +44,43 @@
                   <p>Jenis Pelanggaran</p>
                 </a>
               </li>
-							
+              
               <li class="nav-item">
                 <a href="siswa/get_data" class="app-item nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Tata Tertib</p>
                 </a>
               </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+                Pelanggaran Siswa
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="Pelanggaran/histori" class="app-item nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Histori Pelanggaran</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="kelas/get_data" class="app-item nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Demerit Poin Siswa</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="Pelanggaran/laporan" class="app-item nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Laporan Pelanggaran</p>
+                </a>
+              </li>
+              
             </ul>
           </li>
           

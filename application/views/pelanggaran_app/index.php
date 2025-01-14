@@ -23,7 +23,7 @@
 
                             <div class="mb-3">
                                 <label for="bukti" class="form-label">Bukti Pelanggaran</label>
-                                <input type="file" class="form-control" id="bukti" name="bukti" accept="image/*" required>
+                                <input type="file" class="form-control" id="bukti" name="bukti" accept="image/*" >
                             </div>
 
                             <div class="mb-3">
@@ -35,7 +35,7 @@
 
                             <div class="mb-3">
                                 <label for="keterangan" class="form-label">Keterangan</label>
-                                <textarea class="form-control" id="keterangan" name="keterangan" rows="3" required></textarea>
+                                <textarea class="form-control" id="keterangan" name="keterangan" rows="3"></textarea>
                             </div>
 
                             <div class="mb-3">
