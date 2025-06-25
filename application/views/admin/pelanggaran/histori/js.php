@@ -50,7 +50,7 @@ $(document).ready(function () {
                             <td>${item.tanggal}</td>
                             <td>${item.nama_siswa}</td>
                             <td>${item.kelas}</td>
-                            <td><a href="${item.bukti}" target="_blank">Lihat</a></td>
+                            <td><a href="<?= base_url('inc/media/');?>${item.bukti}" target="_blank">Lihat</a></td>
                             <td>${item.nama_guru}</td>
                             <td>${item.keterangan}</td>
                             <td>${item.tatib}</td>
