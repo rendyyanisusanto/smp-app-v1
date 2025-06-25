@@ -22,25 +22,79 @@ class pelanggaran extends CI_Controller {
     }
     public function get_report()
     {
-        $filterBy = $this->input->post('filterBy');
         $kelas = $this->input->post('kelas');
-        $tanggal = $this->input->post('tanggal');
+        $tanggal_mulai = $this->input->post('tanggal_mulai');
+        $tanggal_selesai = $this->input->post('tanggal_selesai');
 
-        $data = $this->Pelanggaran_model->fetchReport($filterBy, $kelas, $tanggal);
+        $data = $this->Pelanggaran_model->fetchReport($kelas, $tanggal_mulai, $tanggal_selesai);
         echo json_encode($data);
     }
+
     public function generateReport()
     {
-        $filterBy = $this->input->post('filterBy'); // 'hari', 'minggu', 'bulan'
-        $kelas = $this->input->post('kelas'); // ID kelas
-        $tanggal = $this->input->post('tanggal'); // Tanggal filter
+        $kelas = $this->input->post('kelas');
+        $tanggal_mulai = $this->input->post('tanggal_mulai');
+        $tanggal_selesai = $this->input->post('tanggal_selesai');
 
-
-        // Dapatkan data laporan
-        $reportData = $this->Pelanggaran_model->getLaporan($filterBy, $kelas, $tanggal);
-
-        
-        echo $reportData;
+        $this->Pelanggaran_model->getLaporan($kelas, $tanggal_mulai, $tanggal_selesai);
     }
+    public function exportExcelLaporan()
+    {
+        $kelas = $this->input->get('kelas');
+        $tanggal_mulai = $this->input->get('tanggal_mulai');
+        $tanggal_selesai = $this->input->get('tanggal_selesai');
+
+        // Ambil data dengan model
+        ob_start();
+        $this->Pelanggaran_model->getLaporan($kelas, $tanggal_mulai, $tanggal_selesai);
+        $html = ob_get_clean();
+
+        // Set headers untuk file Excel
+        header("Content-Type: application/vnd.ms-excel");
+        header("Content-Disposition: attachment; filename=laporan_demerit_poin.xls");
+
+        echo $html;
+    }
+
+    public function export_excel()
+    {
+        $kelas = $this->input->get('kelas');
+        $tanggal_mulai = $this->input->get('tanggal_mulai');
+        $tanggal_selesai = $this->input->get('tanggal_selesai');
+
+        $data = $this->Pelanggaran_model->fetchReport($kelas, $tanggal_mulai, $tanggal_selesai);
+
+        // Header agar browser menangkap sebagai file Excel
+        header("Content-Type: application/vnd.ms-excel");
+        header("Content-Disposition: attachment; filename=laporan_pelanggaran.xls");
+
+        // Output sebagai tabel HTML (akan dibaca Excel)
+        echo "<table border='1'>";
+        echo "<tr>
+            <th>Tanggal</th>
+            <th>Nama Siswa</th>
+            <th>Kelas</th>
+            <th>Bukti</th>
+            <th>Guru</th>
+            <th>Keterangan</th>
+            <th>Tatib</th>
+        </tr>";
+
+        foreach ($data as $row) {
+            echo "<tr>
+                <td>{$row->tanggal}</td>
+                <td>{$row->nama_siswa}</td>
+                <td>{$row->kelas}</td>
+                <td>" . ($row->bukti ? base_url('inc/media/' . $row->bukti) : '-') . "</td>
+                <td>{$row->nama_guru}</td>
+                <td>{$row->keterangan}</td>
+                <td>{$row->tatib}</td>
+            </tr>";
+        }
+
+        echo "</table>";
+    }
+    
+
 
 }

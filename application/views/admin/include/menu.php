@@ -68,12 +68,12 @@
                   <p>Histori Pelanggaran</p>
                 </a>
               </li>
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a href="kelas/get_data" class="app-item nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Demerit Poin Siswa</p>
                 </a>
-              </li>
+              </li> -->
               <li class="nav-item">
                 <a href="Pelanggaran/laporan" class="app-item nav-link">
                   <i class="far fa-circle nav-icon"></i>

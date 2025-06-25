@@ -1,30 +1,8 @@
 <script>
 $(document).ready(function () {
-    $('#generateReport').on('click', function () {
-        const filterBy = $('#filterBy').val();
-        const kelas = $('#kelas').val();
-        const tanggal = $('#tanggal').val();
-
-        // Kirim data ke server dan render hasilnya ke tabel
-        $.ajax({
-            url: '<?= base_url("admin/Pelanggaran/generateReport") ?>',
-            type: 'POST',
-            data: {
-                filterBy: filterBy,
-                kelas: kelas,
-                tanggal: tanggal,
-            },
-            success: function (result) {
-                $('.reportTable').html(result);
-            },
-            error: function () {
-                alert('Terjadi kesalahan saat memuat laporan!');
-            }
-        });
-    });
-});
-$.ajax({
-        url: '<?= base_url('admin/pelanggaran/get_kelas'); ?>', // Endpoint backend untuk mendapatkan kelas
+    // Load kelas
+    $.ajax({
+        url: '<?= base_url('admin/pelanggaran/get_kelas'); ?>',
         type: 'GET',
         dataType: 'json',
         success: function (data) {
@@ -34,22 +12,37 @@ $.ajax({
         }
     });
 
-    // Adjust date input based on filter selection
-    $('#filterBy').on('change', function () {
-        const filterBy = $(this).val();
-        let inputHtml = '';
+    // Generate laporan
+    $('#generateReport').on('click', function () {
+        const kelas = $('#kelas').val();
+        const tanggal_mulai = $('#tanggal_mulai').val();
+        const tanggal_selesai = $('#tanggal_selesai').val();
 
-        if (filterBy === 'hari') {
-            inputHtml = '<input type="date" id="tanggal" class="form-control">';
-        } else if (filterBy === 'minggu') {
-            inputHtml = '<input type="week" id="tanggal" class="form-control">';
-        } else if (filterBy === 'bulan') {
-            inputHtml = '<input type="month" id="tanggal" class="form-control">';
-        }
-
-        $('#tanggalContainer').html(`
-            <label for="tanggal">Tanggal:</label>
-            ${inputHtml}
-        `);
+        $.ajax({
+            url: '<?= base_url("admin/Pelanggaran/generateReport") ?>',
+            type: 'POST',
+            data: {
+                kelas: kelas,
+                tanggal_mulai: tanggal_mulai,
+                tanggal_selesai: tanggal_selesai,
+            },
+            success: function (result) {
+                $('.reportTable').html(result);
+            },
+            error: function () {
+                alert('Terjadi kesalahan saat memuat laporan!');
+            }
+        });
     });
+
+    // Export ke Excel
+    $('#exportExcel').on('click', function () {
+        const kelas = $('#kelas').val();
+        const tanggal_mulai = $('#tanggal_mulai').val();
+        const tanggal_selesai = $('#tanggal_selesai').val();
+        const query = `?kelas=${kelas}&tanggal_mulai=${tanggal_mulai}&tanggal_selesai=${tanggal_selesai}`;
+        window.open('<?= base_url("admin/Pelanggaran/exportExcelLaporan") ?>' + query, '_blank');
+    });
+});
+
 </script>

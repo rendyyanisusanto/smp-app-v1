@@ -31,16 +31,15 @@ $(document).ready(function () {
         `);
     });
 
-    // Handle report generation
     $('#generateReport').on('click', function () {
-        const filterBy = $('#filterBy').val();
         const kelas = $('#kelas').val();
-        const tanggal = $('#tanggal').val();
+        const tanggal_mulai = $('#tanggal_mulai').val();
+        const tanggal_selesai = $('#tanggal_selesai').val();
 
         $.ajax({
             url: '<?= base_url('admin/pelanggaran/get_report'); ?>',
             type: 'POST',
-            data: { filterBy, kelas, tanggal },
+            data: { kelas, tanggal_mulai, tanggal_selesai },
             dataType: 'json',
             success: function (data) {
                 let tableRows = '';
@@ -61,6 +60,17 @@ $(document).ready(function () {
             }
         });
     });
+
+    $('#exportExcel').on('click', function () {
+        const kelas = $('#kelas').val();
+        const tanggal_mulai = $('#tanggal_mulai').val();
+        const tanggal_selesai = $('#tanggal_selesai').val();
+
+        const query = `?kelas=${kelas}&tanggal_mulai=${tanggal_mulai}&tanggal_selesai=${tanggal_selesai}`;
+        window.open('<?= base_url('admin/pelanggaran/export_excel'); ?>' + query, '_blank');
+    });
+
+
 
 });
 </script>

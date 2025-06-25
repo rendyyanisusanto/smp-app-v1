@@ -8,16 +8,6 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="filterBy">Filter Berdasarkan:</label>
-                        <select id="filterBy" class="form-control">
-                            <option value="hari">Hari</option>
-                            <option value="minggu">Minggu</option>
-                            <option value="bulan">Bulan</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
                         <label for="kelas">Kelas:</label>
                         <select id="kelas" class="form-control">
                             <option value="">Semua Kelas</option>
@@ -25,14 +15,28 @@
                         </select>
                     </div>
                 </div>
+
                 <div class="col-md-4">
-                    <div class="form-group" id="tanggalContainer">
-                        <label for="tanggal">Tanggal:</label>
-                        <input type="date" id="tanggal" class="form-control">
+                    <div class="form-group">
+                        <label for="tanggal_mulai">Tanggal Mulai:</label>
+                        <input type="date" id="tanggal_mulai" class="form-control">
                     </div>
                 </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="tanggal_selesai">Tanggal Selesai:</label>
+                        <input type="date" id="tanggal_selesai" class="form-control">
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-3">
                 <button type="button" id="generateReport" class="btn btn-primary">Generate Laporan</button>
-            </form>
+                <button type="button" id="exportExcel" class="btn btn-success ml-2">Export ke Excel</button>
+            </div>
+        </form>
+
         </div>
     </div>
 </form>
